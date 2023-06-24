@@ -1,18 +1,9 @@
 const { Router } = require("express");
 const { Product } = require('../db');
-const { getProductById, getProduct } = require('../controllers/productController');
+const { getProductById, getProduct, updateProduct, deleteProduct } = require('../controllers/productController');
 
 const router = Router();
 
-// router.get('/products', async (req, res) => {
-//   try {
-//     const products = await Product.findAll();
-//     res.status(200).json(products);
-//   } catch(error) {
-//     console.log('Error al obtener los productos', error);
-//     res.status(500).json({ message: 'Error al obtener los productos' });
-//   }
-// });
 router.get("/products", async (req, res) => {
   try {
     const product = await getProduct(req);
@@ -52,6 +43,21 @@ router.post("/products", async (req, res) => {
   } catch(error) {
     console.log('Error al crear producto', error);
     res.status(500).json({ message: "Error al crear producto" });
+  }
+});
+
+router.put("/products/:id", updateProduct);
+
+router.delete("/products/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedProduct = await deleteProduct(id);
+    deletedProduct
+      ? res.status(200).json({ message: "Producto eliminado con éxito" })
+      : res.status(404).json({ message: "Producto no encontrado" });
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ message: "Error al eliminar producto" });
   }
 });
 
