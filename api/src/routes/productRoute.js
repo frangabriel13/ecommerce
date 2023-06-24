@@ -1,16 +1,24 @@
 const { Router } = require("express");
 const { Product } = require('../db');
-const { getProductById } = require('../controllers/productController');
+const { getProductById, getProduct } = require('../controllers/productController');
 
 const router = Router();
 
-router.get('/products', async (req, res) => {
+// router.get('/products', async (req, res) => {
+//   try {
+//     const products = await Product.findAll();
+//     res.status(200).json(products);
+//   } catch(error) {
+//     console.log('Error al obtener los productos', error);
+//     res.status(500).json({ message: 'Error al obtener los productos' });
+//   }
+// });
+router.get("/products", async (req, res) => {
   try {
-    const products = await Product.findAll();
-    res.status(200).json(products);
+    const product = await getProduct(req);
+    res.status(200).json(product);
   } catch(error) {
-    console.log('Error al obtener los productos', error);
-    res.status(500).json({ message: 'Error al obtener los productos' });
+    res.status(500).json({ message: 'Error al buscar producto' })
   }
 });
 
