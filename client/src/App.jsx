@@ -1,33 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import Header from './components/header/Header';
 
 function App() {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button>
-          count
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
     </>
   )
 }
 
-export default App
+export default App;
+
+// import React from 'react';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import LandingPage from './pages/LandingPage';
+// import Home from './pages/Home';
+// import Tienda from './pages/Tienda';
+// import Categorias from './pages/Categorias';
+// import Contacto from './pages/Contacto';
+// import Header from './components/Header';
+// import Footer from './components/Footer';
+
+// const App = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route exact path="/" component={LandingPage} />
+//         <Route path="/home" component={Home} />
+//         <Route path="/tienda" component={Tienda} />
+//         <Route path="/categorias" component={Categorias} />
+//         <Route path="/contacto" component={Contacto} />
+//       </Switch>
+//       {/* Coloca el componente Header aquí para que se muestre en todas las secciones */}
+//       {/* Coloca el componente Footer aquí para que se muestre en todas las secciones */}
+//     </Router>
+//   );
+// };
+
+// export default App;
