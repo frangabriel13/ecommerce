@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import s from './Card.module.css'; // Asegúrate de tener el archivo CSS correspondiente
 
 const product = [
@@ -169,12 +170,14 @@ function Card({ id, name, price, images }) {
       <img src={product[0].images[0]} alt={name} className={s.img} />
       <h3 className={s.name}>{product[0].name}</h3>
       <p className={s.price}>{product[0].price}</p>
-      {/* <Link to={`/products/${id}`} className={s.detail}>
-        <span>Ver más</span>
-      </Link> */}
-      <Router basename={`/products/${id}`} className={s.detail}>
-        <span>Ver más</span>
+      <Router>
+         <Link to={`/products/${id}`} className={s.detail}>
+            <span>Ver más</span>
+         </Link>
       </Router>
+      {/* <Router basename={`/products/${id}`} className={s.detail}>
+        <span>Ver más</span>
+      </Router> */}
     </div>
   );
 };
