@@ -170,11 +170,9 @@ function Card({ id, name, price, images }) {
       <img src={product[0].images[0]} alt={name} className={s.img} />
       <h3 className={s.name}>{product[0].name}</h3>
       <p className={s.price}>{product[0].price}</p>
-      <Router>
          <Link to={`/products/${id}`} className={s.detail}>
             <span>Ver más</span>
          </Link>
-      </Router>
       {/* <Router basename={`/products/${id}`} className={s.detail}>
         <span>Ver más</span>
       </Router> */}
