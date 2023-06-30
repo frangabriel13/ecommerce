@@ -167,9 +167,18 @@ function Card({ id, name, price, images }) {
 
   return (
     <div className={s.card}>
+     <div className={s.img}>
       <img src={product[0].images[0]} alt={name} className={s.img} />
-      <h3 className={s.name}>{product[0].name}</h3>
-      <p className={s.price}>{product[0].price}</p>
+         <div className={s.overlay}>
+            <Link to={`/products/${id}`} className={s.detail}>
+               <button>Ver más</button>
+            </Link>
+         </div>
+      <div className={s.content}>
+        <h3 className={s.name}>{product[0].name}</h3>
+        <p className={s.price}>{product[0].price}</p>
+      </div>
+    </div>
          <Link to={`/products/${id}`} className={s.detail}>
             <span>Ver más</span>
          </Link>
