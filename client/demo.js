@@ -23,7 +23,8 @@
   //         "https://images.hola.com/imagenes/moda/tendencias/20230308227207/mejores-vestidos-de-flores/1-211-666/vestidofloreslook1-m.jpg?tx=w_680",
   //         "https://vertiche.mx/wp-content/uploads/2023/03/84290-NEGRO-1.jpg"
   //     ],
-  //     "stock": 15
+  //     "stock": 15.
+
   // };
   // {
       
