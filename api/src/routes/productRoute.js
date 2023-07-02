@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { Product } = require('../db');
+const cloudinary = require('../utils/cloudinary');
 const { getProductById, getProduct, updateProduct, deleteProduct } = require('../controllers/productController');
 
 const router = Router();
@@ -29,14 +30,18 @@ router.get('/products/:id', async (req, res) => {
 
 router.post("/products", async (req, res) => {
   let { name, description, price, discount, category, images, stock } = req.body;
+
   try {
+    const uploadedImages = await Promise.all(images.map((image) => cloudinary.uploader.upload(image)));
+    const imageUrls = uploadedImages.map((image) => image.secure_url);
+    
     let createProduct = await Product.create({
       name,
       description,
       price,
       discount,
       category,
-      images,
+      images: imageUrls,
       stock
     });
     res.status(201).json(createProduct);
