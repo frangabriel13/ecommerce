@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { uploadToCloudinary } = require('../utils/cloudinary');
 
 module.exports = (sequelize) => {
   sequelize.define('product', {
@@ -21,8 +22,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // images: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING),
+    // },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),
+      
     },
     stock: {
       type: DataTypes.INTEGER,
