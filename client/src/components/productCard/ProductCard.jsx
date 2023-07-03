@@ -6,13 +6,12 @@ import s from './ProductCard.module.css'; // Asegúrate de tener el archivo CSS 
 
 
 function ProductCard({ id, name, price, images }) {
-console.log(images)
+const imageUrl = images && images.length > 0 ? images[0] : '';
 
   return (
- 
     <div className={s.card}>
      <div className={s.img}>
-      <img src={images} alt={name} className={s.img} />
+      <img src={imageUrl} alt={name} className={s.img} />
          <div className={s.overlay}>
             <Link to={`/products/${id}`} className={s.detail}>
                <button>Ver más</button>
