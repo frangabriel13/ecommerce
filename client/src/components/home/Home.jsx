@@ -10,7 +10,7 @@ function Home() {
     <div className={s.container}>
       <Banner />
       <Info />
-      <ProductCard />
+    
       <ProductStore />
     </div>
   );
