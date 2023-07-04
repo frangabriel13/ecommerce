@@ -10,3 +10,17 @@ export const getProducts = () => {
     return products;
   };
 };
+
+export function orderByPrice(payload) {
+  return {
+    type: 'ORDER_BY_PRICE',
+    payload
+  }
+};
+
+export function setCategoryFilter (payload) {
+  return {
+    type: 'SET_CATEGORY_FILTER',
+    payload
+  };
+};
