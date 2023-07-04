@@ -1,27 +1,25 @@
-/* Estilos generales */
-body {
-  margin: 0;
-  padding: 0;
+.productStore {
   background-color: white;
-}
-
-.container {
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.select-wrapper {
+.filterWrapper {
+  display: flex; /* Agregado */
+  align-items: center; /* Agregado */
   margin-bottom: 10px;
 }
 
-.select-wrapper label {
-  display: block;
-  margin-bottom: 5px;
+.filterLabel {
+  margin-right: 10px; /* Agregado */
   font-weight: bold;
 }
 
-.select-wrapper select {
+.filterSelect {
   width: 100%;
   padding: 5px;
   font-size: 16px;
@@ -29,7 +27,7 @@ body {
   border-radius: 4px;
 }
 
-.product-cards-container {
+.productCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -58,4 +56,3 @@ body {
 .product-card p {
   margin: 0;
 }
-

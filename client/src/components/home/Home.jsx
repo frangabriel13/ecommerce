@@ -4,6 +4,7 @@ import Banner from "../banner/Banner";
 import Info from "../info/Info";
 import ProductCard from "../productCard/ProductCard"
 import ProductStore from "../productStore/ProductStore";
+import Footer from "../footer/Footer";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Info />
     
       <ProductStore />
+      <Footer />
     </div>
   );
 }
