@@ -1,29 +1,21 @@
 import React from 'react';
 import s from './ProductDetail.module.css';
-import ReactImageZoom from 'react-image-zoom';
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "react-image-gallery";
 
 const ProductDetail = ({ product }) => {
+  const images = product.images.map((image) => ({
+    original: image,
+    thumbnail: image,
+  }));
+
   return (
     <div className={s.divGlobal}>
       <div className={s.divImage}>
         {product.images && (
-          <div className={s.productoDetailImagesContainer}>
+          <div className={s.productoDetailImages}>
             <h3>Images:</h3>
-            <div className={s.productoDetailImageContainer}>
-              {product.images.map((image, index) => (
-                <ReactImageZoom
-                  key={index}
-                  zoomImage={image}
-                  img={image}
-                  zoomPosition="original"
-                  width={400}
-                  height={700}
-                  defaultScale={1}
-                  zoomStyle="z-index: 1000; color: red;"
-                  className={s.productoDetailImage}
-                />
-              ))}
-            </div>
+            <ImageGallery items={images} />
           </div>
         )}
       </div>
@@ -33,7 +25,7 @@ const ProductDetail = ({ product }) => {
         <p className={s.productoDetailPrice}>Price: ${product.price}</p>
         {product.discount && <p className={s.productoDetailDiscount}>Discount: {product.discount}%</p>}
         <p className={s.productoDetailCategory}>Category: {product.category}</p>
-
+        
         <p className={s.productoDetailStock}>Stock: {product.stock}</p>
         {product.isVariable && (
           <p className={s.productoDetailVariations}>This product has variations</p>
@@ -44,4 +36,5 @@ const ProductDetail = ({ product }) => {
 };
 
 export default ProductDetail;
+
 

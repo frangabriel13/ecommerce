@@ -46,7 +46,9 @@
 }
 
 .productoDetailImages {
-  margin-top: 20px;
+  width: 100%;
+  max-width: 400px; /* Ajusta el ancho según tus necesidades */
+  margin-right: 20px; /* Ajusta el margen según tus necesidades */
 }
 
 .productoDetailImageContainer {
