@@ -29,7 +29,7 @@ router.get('/products/:id', async (req, res) => {
 });
 
 router.post("/products", async (req, res) => {
-  let { name, description, price, discount, category, images, stock } = req.body;
+  let { name, description, price, discount, category, images, stock, isVariable } = req.body;
 
   try {
     const uploadedImages = await Promise.all(images.map((image) => cloudinary.uploader.upload(image)));
@@ -42,7 +42,8 @@ router.post("/products", async (req, res) => {
       discount,
       category,
       images: imageUrls,
-      stock
+      stock,
+      isVariable
     });
     res.status(201).json(createProduct);
   } catch(error) {
