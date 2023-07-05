@@ -1,0 +1,106 @@
+.divGlobal {
+  display: flex;
+  gap: 20px;
+}
+
+.divImage {
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+
+.productoDetail {
+  flex: 0 0 60%;
+  max-width: 60%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.productoDetailName {
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.productoDetailDescription {
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.productoDetailPrice {
+  font-weight: bold;
+  color: #ff5722;
+  margin-bottom: 10px;
+}
+
+.productoDetailDiscount {
+  color: #00a65a;
+  margin-bottom: 10px;
+}
+
+.productoDetailCategory {
+  font-style: italic;
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.productoDetailImages {
+  width: 100%;
+  max-width: 400px; /* Ajusta el ancho según tus necesidades */
+  margin-right: 20px; /* Ajusta el margen según tus necesidades */
+}
+
+.productoDetailImageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 40rem;
+  max-height: 80rem;
+  overflow: hidden;
+}
+
+.productoDetailImage {
+  width: 40rem;
+  height: 60rem;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+.productoDetailImage:hover {
+  transform: scale(1.2);
+}
+
+.productoDetailImageZoomOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.productoDetailImageZoomOverlay.active {
+  display: flex;
+}
+
+.productoDetailImageZoom {
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+.productoDetailStock {
+  font-weight: bold;
+  color: #333333;
+  margin-top: 20px;
+}
+
+.productoDetailVariations {
+  font-style: italic;
+  color: #666666;
+  margin-top: 20px;
+}
