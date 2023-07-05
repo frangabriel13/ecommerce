@@ -39,12 +39,12 @@ function ProductStore() {
   
     currentProducts = filteredProducts.slice(firstIndexProduct, lastIndexProduct);
   }
-  
   function handleCategoryChange(e) {
     setCategoryFilter(e.target.value);
     let filteredProducts = allProducts.data.filter(p => p.category === e.target.value);
     currentProducts = filteredProducts.slice(firstIndexProduct, lastIndexProduct);
   }
+ 
   // const handleCategoryChange = event => {
   //   setCategoryFilter(event.target.value);
   // };
