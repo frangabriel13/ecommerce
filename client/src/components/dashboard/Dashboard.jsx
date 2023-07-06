@@ -1,10 +1,13 @@
 import React from "react";
+import ProductForm from "./productForm/ProductForm";
+import s from './Dashboard.module.css';
 
 function Dashboard() {
   return (
-        <div className={s.container}>
-        </div>
-      );
+    <div className={s.container}>
+      <ProductForm />
+    </div>
+  );
 }
 
 
