@@ -4,8 +4,19 @@
 }
 
 .divImage {
-  flex: 0 0 40%;
-  max-width: 40%;
+  overflow: hidden;
+}
+
+.productoDetailImages .image-gallery-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.productoDetailImages .image-gallery-thumbnail {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
 }
 
 .productoDetail {
@@ -46,9 +57,12 @@
 }
 
 .productoDetailImages {
-  width: 100%;
-  max-width: 400px; /* Ajusta el ancho según tus necesidades */
-  margin-right: 20px; /* Ajusta el margen según tus necesidades */
+  overflow: scroll; 
+  max-height: 700px;
+ 
+}
+.productoDetailImages::-webkit-scrollbar {
+  display: none;
 }
 
 .productoDetailImageContainer {

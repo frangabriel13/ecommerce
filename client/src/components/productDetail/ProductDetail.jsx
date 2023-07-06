@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import s from './ProductDetail.module.css';
-import "react-image-gallery/styles/css/image-gallery.css";
-import ImageGallery from "react-image-gallery";
+import { useState } from 'react';
 
 const ProductDetail = ({ product }) => {
-  const images = product.images.map((image) => ({
-    original: image,
-    thumbnail: image,
-  }));
+  const imagesRef = useRef(null);
+  const [showScroll, setShowScroll] = useState(false);
+  useEffect(() => {
+    const imagesContainer = imagesRef.current;
+    imagesContainer.scrollTop = imagesContainer.scrollHeight; 
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = imagesContainer;
+      imagesContainer.scrollLeft = scrollHeight - clientHeight - scrollTop;
+    };
+    imagesContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      imagesContainer.removeEventListener('scroll', handleScroll); 
+    };
+  }, []);
 
   return (
     <div className={s.divGlobal}>
-      <div className={s.divImage}>
+      <div className={s.divImage} ref={imagesRef} >
         {product.images && (
           <div className={s.productoDetailImages}>
             <h3>Images:</h3>
-            <ImageGallery items={images} />
+            <div className={s.productoDetailImages}
+             style={{scrollSnapType: 'y mandatory', scrollPadding: '200px 0'}}>
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Image ${index + 1}`}
+                  className={s.productoDetailImage}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -36,5 +55,4 @@ const ProductDetail = ({ product }) => {
 };
 
 export default ProductDetail;
-
 
