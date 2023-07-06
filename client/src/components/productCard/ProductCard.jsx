@@ -11,7 +11,7 @@ const imageUrl = images && images.length > 0 ? images[0] : '';
   return (
     <div className={s.card}>
      <div className={s.img}>
-      <img src={imageUrl} alt={name} className={s.img} />
+      <img src={imageUrl} alt={name}  />
          <div className={s.overlay}>
             <Link to={`/products/${id}`} className={s.detail}>
                <button>Ver más</button>
