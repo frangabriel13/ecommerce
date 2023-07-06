@@ -9,7 +9,11 @@ const ProductPage = () => {
     price: 19.99,
     discount: 10,
     category: 'Category',
-    images: ['https://rumay.com.ar/wp-content/uploads/2023/05/IMG_20230702_130705-scaled.jpg', 'https://rumay.com.ar/wp-content/uploads/2023/05/d-22-scaled.jpg'],
+    images: ["https://rumay.com.ar/wp-content/uploads/2023/07/IMG_20230702_111518-scaled.jpg",
+    "https://rumay.com.ar/wp-content/uploads/2023/07/IMG_20230702_110939-scaled.jpg",
+    "https://rumay.com.ar/wp-content/uploads/2023/07/IMG_20230702_111722-scaled.jpg",
+    "https://rumay.com.ar/wp-content/uploads/2023/07/IMG_20230702_111316-scaled.jpg",
+    "https://rumay.com.ar/wp-content/uploads/2023/07/IMG_20230702_110825-scaled.jpg"],
     stock: 10,
     isVariable: true
   };
