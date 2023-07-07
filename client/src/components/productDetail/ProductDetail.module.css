@@ -1,35 +1,24 @@
 .divGlobal {
   display: flex;
-  gap: 20px;
+  /* gap: 2rem; */
+  /* padding: 5.5rem 5%; */
 }
 
 .divImage {
   overflow: hidden;
 }
 
-.productoDetailImages .image-gallery-thumbnails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.productoDetailImages .image-gallery-thumbnail {
-  width: 100px;
-  height: auto;
-  cursor: pointer;
-}
-
 .productoDetail {
-  flex: 0 0 60%;
-  max-width: 60%;
+  flex: 0 0 40%;
+  max-width: 40%;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 2rem;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .productoDetailName {
-  font-size: 24px;
+  font-size: 2.4rem;
   color: #333333;
   margin-bottom: 10px;
 }
@@ -58,7 +47,7 @@
 
 .productoDetailImages {
   overflow: scroll; 
-  max-height: 700px;
+  max-height: 90rem;
  
 }
 .productoDetailImages::-webkit-scrollbar {
@@ -75,28 +64,13 @@
 }
 
 .productoDetailImage {
-  width: 40rem;
-  height: 60rem;
+  width: 60rem;
+  height: 90rem;
   object-fit: cover;
   cursor: zoom-in;
 }
 
-.productoDetailImage:hover {
-  transform: scale(1.2);
-}
 
-.productoDetailImageZoomOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
 
 .productoDetailImageZoomOverlay.active {
   display: flex;
@@ -110,11 +84,29 @@
 .productoDetailStock {
   font-weight: bold;
   color: #333333;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .productoDetailVariations {
   font-style: italic;
   color: #666666;
-  margin-top: 20px;
+  margin-top: 2rem;
+}
+.gallery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 8rem;
+}
+
+.galleryImage {
+  width: 12rem;
+  height: 20rem;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.selected {
+  border: 2px solid red;
 }

@@ -3,6 +3,7 @@ import s from './ProductDetail.module.css';
 import { useState } from 'react';
 
 const ProductDetail = ({ product }) => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const imagesRef = useRef(null);
   const [showScroll, setShowScroll] = useState(false);
   useEffect(() => {
@@ -17,38 +18,54 @@ const ProductDetail = ({ product }) => {
       imagesContainer.removeEventListener('scroll', handleScroll); 
     };
   }, []);
-
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+  };
+  
   return (
-    <div className={s.divGlobal}>
-      <div className={s.divImage} ref={imagesRef} >
-        {product.images && (
-          <div className={s.productoDetailImages}>
-            <h3>Images:</h3>
-            <div className={s.productoDetailImages}
-             style={{scrollSnapType: 'y mandatory', scrollPadding: '200px 0'}}>
-              {product.images.map((image, index) => (
-                <img
+  <div className={s.divGlobal}>
+      <div>
+         <div className={s.gallery}>
+            {product.images && product.images.map((image, index) => (
+                 <img
                   key={index}
                   src={image}
                   alt={`Image ${index + 1}`}
-                  className={s.productoDetailImage}
+                  className={`${s.galleryImage} ${selectedImageIndex === index ? s.selected : ''}`}
+                onClick={() => handleImageClick(index)}
                 />
-              ))}
-            </div>
-          </div>
-        )}
+             ))}
+         </div>
       </div>
-      <div className={s.productoDetail}>
-        <h2 className={s.productoDetailName}>{product.name}</h2>
-        <p className={s.productoDetailDescription}>Description: {product.description}</p>
-        <p className={s.productoDetailPrice}>Price: ${product.price}</p>
-        {product.discount && <p className={s.productoDetailDiscount}>Discount: {product.discount}%</p>}
-        <p className={s.productoDetailCategory}>Category: {product.category}</p>
+      <div className={s.divImage} ref={imagesRef} >
+                 {product.images && (
+                   <div className={s.productoDetailImages}>
         
-        <p className={s.productoDetailStock}>Stock: {product.stock}</p>
-        {product.isVariable && (
+                      <div className={s.productoDetailImages}
+                         style={{scrollSnapType: 'y mandatory', scrollPadding: '200px 0'}}>
+                            {product.images.map((image, index) => (
+                               <img
+                                 key={index}
+                                 src={image}
+                                 alt={`Image ${index + 1}`}
+                                 className={s.productoDetailImage}
+                                />
+                            ))}
+                      </div>
+                   </div>
+                 )}
+        </div>
+        <div className={s.productoDetail}>
+          <h2 className={s.productoDetailName}>{product.name}</h2>
+          <p className={s.productoDetailDescription}>Description: {product.description}</p>
+          <p className={s.productoDetailPrice}>Price: ${product.price}</p>
+            {product.discount && <p className={s.productoDetailDiscount}>Discount: {product.discount}%</p>}
+          <p className={s.productoDetailCategory}>Category: {product.category}</p>
+        
+          <p className={s.productoDetailStock}>Stock: {product.stock}</p>
+            {product.isVariable && (
           <p className={s.productoDetailVariations}>This product has variations</p>
-        )}
+            )}
       </div>
     </div>
   );
