@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductDetail from '../productDetail/productDetail';
+import s from './ProductPage.module.css'
 
 
 const ProductPage = () => {
@@ -19,7 +20,7 @@ const ProductPage = () => {
   };
 
   return (
-    <div>
+    <div className={s.divGlobal}>
       <h1>Product Page</h1>
       <ProductDetail product={product} />
     </div>
