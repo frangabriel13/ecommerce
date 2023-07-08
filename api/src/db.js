@@ -32,7 +32,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Product, Variation } = sequelize.models;
+const { User, Product, Variation, Category } = sequelize.models;
 
 User.belongsToMany(Product, { through: 'UserFavorites', as: 'favorites' });
 Product.belongsToMany(User, { through: 'UserFavorites', as: 'users' });
@@ -40,6 +40,8 @@ Product.belongsToMany(User, { through: 'UserFavorites', as: 'users' });
 Product.hasMany(Variation, { as: 'variations' });
 Variation.belongsTo(Product);
 
+Category.belongsTo(Category, { as: 'parentCategory', foreignKey: 'parentId' });
+Category.hasMany(Category, { as: 'subcategories', foreignKey: 'parentId' });
 
 
 module.exports = {
