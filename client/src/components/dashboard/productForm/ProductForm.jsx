@@ -3,52 +3,52 @@ import s from './ProductForm.module.css';
 
 function ProductForm() {
   return (
-        <div className={s.container}>
-          <h2>Añadir producto</h2>
-          <div>
-            <div>
-              <label htmlFor="name">Nombre</label>
-              <input type="text" />
-              <label htmlFor="description">Descripción</label>
-              <textarea />
-            </div>
-            <div>
-              <label htmlFor="category">Categoría</label>
-              <select>
-                <option value="ninguno">Ninguna</option>
-                <option value="remeras">Remeras</option>
-                <option value="remeras">Camperas</option>
-                <option value="remeras">Buzos</option>
-                <option value="remeras">Camisas</option>
-                <option value="remeras">Pantalones</option>
-              </select>
-              <label htmlFor="price">Precio</label>
-              <input type="number" />
-            </div>
-            <div>
-              <label htmlFor="stock">Stock</label>
-              <input type="number" />
-              <label htmlFor="discount">Descuento</label>
-              <input type="number" />
-            </div>
-          </div>
-          <div>
-           <label>Imágenes</label>
-           <div>
-             {/* Mostrar las imágenes seleccionadas */}
-           </div>
-           <input type="file" />
-
-           <label>
-              Disponibilidad:
-              <input type="checkbox" />
-           </label>
-
-           <button>Agregar variaciones</button>
-           <button>Crear producto</button>
-         </div>
+    <div className={s.container}>
+      <h2>Añadir producto</h2>
+      <div>
+        <div>
+          <label htmlFor="name">Nombre</label>
+          <input type="text" />
+          <label htmlFor="description">Descripción</label>
+          <textarea />
         </div>
-      );
+        <div>
+          <label htmlFor="category">Categoría</label>
+          <select>
+            <option value="ninguno">Ninguna</option>
+            <option value="remeras">Remeras</option>
+            <option value="remeras">Camperas</option>
+            <option value="remeras">Buzos</option>
+            <option value="remeras">Camisas</option>
+            <option value="remeras">Pantalones</option>
+          </select>
+          <label htmlFor="price">Precio</label>
+          <input type="number" />
+        </div>
+        <div>
+          <label htmlFor="stock">Stock</label>
+          <input type="number" />
+          <label htmlFor="discount">Descuento</label>
+          <input type="number" />
+        </div>
+      </div>
+      <div>
+        <label>Imágenes</label>
+        <div>
+          {/* Mostrar las imágenes seleccionadas */}
+        </div>
+        <input type="file" />
+
+        <label>
+          Disponibilidad:
+          <input type="checkbox" />
+        </label>
+
+        <button>Agregar variaciones</button>
+        <button>Crear producto</button>
+      </div>
+    </div>
+  );
 }
 
 
