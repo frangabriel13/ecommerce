@@ -13,3 +13,26 @@
   width: 50%;
   background-color: aquamarine;
 }
+
+.categoryName {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #ff5555;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #ff3333;
+}

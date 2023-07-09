@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories } from "../../../actions/categoryAction";
+import { getCategories, postCategory } from "../../../actions/categoryAction";
 import s from './CategoryManagement.module.css';
 
 function CategoryManagement() {
@@ -11,7 +11,31 @@ function CategoryManagement() {
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
-  console.log(categories)
+
+  const handleAddCategory = async () => {
+    const categoryName = document.getElementById("categoryName").value.trim();
+
+    if (categoryName === "") {
+      alert('El nombre de categoría no puede estar vacío');
+      return;
+    }
+
+    const payload = {
+      name: categoryName.toLowerCase(),
+      order: 1
+    };
+  
+    try {
+      const response = await dispatch(postCategory(payload));
+      dispatch(getCategories());
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        alert('Categoría ya existente')
+      } else {
+        console.log(error)
+      }
+    }
+  };
 
   return (
     <div className={s.container}>
@@ -20,24 +44,17 @@ function CategoryManagement() {
 
         <div className={s.categories}>
           <div className={s.search}>
-            <input type="text" placeholder="Buscar..." />
-            <button>Buscar</button>
-            <button>Agregar</button>
+            <input id="categoryName" type="text" placeholder="Nombre..." />
+            <button onClick={(e) => handleAddCategory(e)}>Agregar</button>
           </div>
           <div className={s.categoryList}>
             <div className={s.level1}>
-              {/* Renderizar categorías de nivel 1 */}
               {categories && categories.map(category => (
                 <div key={category.id}>
-                  <h4 className={s.categoryName}>{category.name}</h4>
+                  <button className={s.categoryName}>{category.name}</button>
+                  <button className={s.deleteButton}>X</button>
                 </div>
               ))}
-            </div>
-            <div className={s.level2}>
-              {/* Renderizar categorías de nivel 2 */}
-            </div>
-            <div className={s.level3}>
-              {/* Renderizar categorías de nivel 3 */}
             </div>
           </div>
         </div>
@@ -72,55 +89,3 @@ function CategoryManagement() {
 
 
 export default CategoryManagement;
-
-
-
-
-// function CategoryManagement() {
-//   return (
-//     <div className={s.container}>
-//       <h2>Categorías</h2>
-//       <div className={s.categoryContainer}>
-//         <div className={s.categoryList}>
-//           <div className={s.searchBar}>
-//             <input type="text" placeholder="Buscar categoría" />
-//             <button>Buscar</button>
-//             <button>Agregar</button>
-//           </div>
-//           <div className={s.categoryLevels}>
-//             <div className={s.categoryLevel1}>
-//               {/* Renderizar categorías de nivel 1 */}
-//             </div>
-//             <div className={s.categoryLevel2}>
-//               {/* Renderizar categorías de nivel 2 */}
-//             </div>
-//             <div className={s.categoryLevel3}>
-//               {/* Renderizar categorías de nivel 3 */}
-//             </div>
-//           </div>
-//         </div>
-//         <div className={s.categoryDetails}>
-//           <h3>Datos de la categoría seleccionada</h3>
-//           <div className={s.categoryInfo}>
-//             <label>
-//               Nombre:
-//               <input type="text" />
-//             </label>
-//             <label>
-//               Categoría padre:
-//               <select>
-//                 {/* Renderizar opciones de categorías padre */}
-//               </select>
-//             </label>
-//           </div>
-//           <div className={s.subcategories}>
-//             <h4>Subcategorías:</h4>
-//             {/* Renderizar subcategorías de la categoría seleccionada */}
-//           </div>
-//           <button>Eliminar</button>
-//           <button>Guardar cambios</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

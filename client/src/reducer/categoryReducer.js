@@ -11,6 +11,10 @@ function categoryReducer(state = initialState, action) {
         categories: action.payload,
         allCategories: action.payload
       }
+    case 'POST_POKEMON':
+      return {
+        ...state
+      }
     default: return state;
   }
 }
