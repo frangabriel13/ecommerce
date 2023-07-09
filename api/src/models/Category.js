@@ -6,5 +6,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    order: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, { timestamps: false })
 }

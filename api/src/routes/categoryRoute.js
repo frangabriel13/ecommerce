@@ -4,15 +4,25 @@ const { getCategoryId, getCategories, updateCategory, deleteCategory } = require
 
 const router = Router();
 
+// router.get('/categories', async (req, res) => {
+//   try {
+//     const categories = await getCategories();
+//     res.status(200).json(categories);
+//   } catch(error) {
+//     console.log(error);
+//     return res.status(500).json({ message: 'Error interno en el servidor' })
+//   }
+// })
+
 router.get('/categories', async (req, res) => {
   try {
-    const categories = await getCategories();
+    const categories = await Category.findAll();
     res.status(200).json(categories);
   } catch(error) {
-    console.log(error);
-    return res.status(500).json({ message: 'Error interno en el servidor' })
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener las categorías' });
   }
-})
+});
 
 router.get('/categories/:id', async (req, res) => {
   const { id } = req.params;
@@ -29,12 +39,13 @@ router.get('/categories/:id', async (req, res) => {
 });
 
 router.post("/categories", async (req, res) => {
-  let { name, parentId } = req.body;
+  let { name, parentId, order } = req.body;
 
   try {
     let createCategory = await Category.create({
       name,
-      parentId
+      parentId,
+      order
     });
     res.status(201).json(createCategory);
   } catch(error) {
