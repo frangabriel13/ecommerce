@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import s from './CategoryManagement.module.css';
 
 function CategoryManagement() {
+  const categories = useSelector(state => state.categories);
+
   return (
     <div className={s.container}>
       <h2>Categorías</h2>
