@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { Category } = require('../db');
+const { Op } = require("sequelize");
 const { getCategoryId, getCategories, updateCategory, deleteCategory } = require('../controllers/categoryController');
 
 const router = Router();
@@ -14,9 +15,40 @@ const router = Router();
 //   }
 // })
 
+// router.get('/categories', async (req, res) => {
+//   try {
+//     const categories = await Category.findAll();
+//     res.status(200).json(categories);
+//   } catch(error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Error al obtener las categorías' });
+//   }
+// });
+
 router.get('/categories', async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    const { name } = req.query;
+
+    if (!name) {
+      const categories = await Category.findAll();
+      return res.status(200).json(categories);
+    }
+
+    const categories = await Category.findAll({
+      where: {
+        name: {
+          [Op.or]: [
+            { [Op.iLike]: `${name}%` },
+            { [Op.iLike]: `% ${name}%` }
+          ]
+        }
+      }
+    });
+
+    if (categories.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron categorías con ese nombre.' });
+    }
+
     res.status(200).json(categories);
   } catch(error) {
     console.error(error);

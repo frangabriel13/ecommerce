@@ -7,9 +7,14 @@ import s from './Dashboard.module.css';
 function Dashboard() {
   return (
     <div className={s.container}>
-      <SideBar />
+      <div className={s.sideBar}>
+        <SideBar />
+      </div>
+      <div className={s.content}>
+        <CategoryManagement />
+      </div>
       {/* <ProductForm /> */}
-      <CategoryManagement />
+      
     </div>
   );
 }

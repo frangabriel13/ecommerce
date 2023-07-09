@@ -1,14 +1,23 @@
 import React from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getCategories } from "../../../actions/categoryAction";
 import s from './CategoryManagement.module.css';
 
 function CategoryManagement() {
-  const categories = useSelector(state => state.categories);
+  const categories = useSelector((state) => state.categories.categories.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+  console.log(categories)
 
   return (
     <div className={s.container}>
       <h2>Categorías</h2>
       <div className={s.categoryContainer}>
+
         <div className={s.categories}>
           <div className={s.search}>
             <input type="text" placeholder="Buscar..." />
@@ -18,6 +27,11 @@ function CategoryManagement() {
           <div className={s.categoryList}>
             <div className={s.level1}>
               {/* Renderizar categorías de nivel 1 */}
+              {categories && categories.map(category => (
+                <div key={category.id}>
+                  <h4 className={s.categoryName}>{category.name}</h4>
+                </div>
+              ))}
             </div>
             <div className={s.level2}>
               {/* Renderizar categorías de nivel 2 */}
@@ -49,10 +63,9 @@ function CategoryManagement() {
           <button>Eliminar categoría</button>
           <button>Guardar cambios</button>
         </div>
-
-        <button>Cancelar</button>
-        <button>Guardar cambios</button>
       </div>
+      <button>Cancelar</button>
+      <button>Guardar cambios</button>
     </div>
   );
 }
