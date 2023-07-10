@@ -15,6 +15,11 @@ function categoryReducer(state = initialState, action) {
       return {
         ...state
       }
+    case 'DELETE_CATEGORY':
+      return {
+        ...state,
+        categories: state.categories.filter(category => category.id !== action.payload)
+      }
     default: return state;
   }
 }

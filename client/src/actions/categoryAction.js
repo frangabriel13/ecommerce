@@ -11,13 +11,6 @@ export const getCategories = () => {
   };
 };
 
-// export const postCategory = (payload) => {
-//   return async function(dispatch) {
-//     let response = await instance.post("categories", payload)
-//     return response
-//   }
-// }
-
 export const postCategory = (payload) => {
   return async function(dispatch) {
     try {
@@ -28,3 +21,13 @@ export const postCategory = (payload) => {
     }
   };
 };
+
+export const deleteCategory = (id) => {
+  return async function(dispatch) {
+    try {
+      await instance.delete(`categories/${id}`);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}

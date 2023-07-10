@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories, postCategory } from "../../../actions/categoryAction";
+import { getCategories, postCategory, deleteCategory } from "../../../actions/categoryAction";
 import s from './CategoryManagement.module.css';
 
 function CategoryManagement() {
@@ -20,14 +20,18 @@ function CategoryManagement() {
       return;
     }
 
+    const sortedCategories = [...categories].sort((a, b) => b.order - a.order);
+    const lastOrder = sortedCategories.length > 0 ? sortedCategories[0].order : 0;
+
     const payload = {
       name: categoryName.toLowerCase(),
-      order: 1
+      order: lastOrder + 1
     };
   
     try {
       const response = await dispatch(postCategory(payload));
       dispatch(getCategories());
+      document.getElementById("categoryName").value = "";
     } catch (error) {
       if (error.response && error.response.status === 500) {
         alert('Categoría ya existente')
@@ -36,6 +40,11 @@ function CategoryManagement() {
       }
     }
   };
+
+  const handleDeleteCategory = async (id) => {
+    await dispatch(deleteCategory(id));
+    dispatch(getCategories());
+  }
 
   return (
     <div className={s.container}>
@@ -52,7 +61,7 @@ function CategoryManagement() {
               {categories && categories.map(category => (
                 <div key={category.id}>
                   <button className={s.categoryName}>{category.name}</button>
-                  <button className={s.deleteButton}>X</button>
+                  <button className={s.deleteButton} onClick={() => handleDeleteCategory(category.id)}>X</button>
                 </div>
               ))}
             </div>
