@@ -1,16 +1,28 @@
-import ProductCard from '../productCard/ProductCard'
-import style from './ProductCards.module.css'
+import ProductCard from '../productCard/ProductCard';
+import style from './ProductCards.module.css';
+import React, { useState } from 'react';
 
+export default function ProductCards({ currentProducts }) {
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-export default function ProductCards({currentProducts}){
+  const handleProductSelect = (product) => {
+    setSelectedProduct(product);
+  };
 
-   
-    return(
-        <div className={style.container}>
-            {
-                currentProducts&&currentProducts.map(c=><ProductCard name={c.name} price={c.price} id={c.id} images={c.images} key={c.id}/>)
-                
-            }
-        </div>
-    )
+  return (
+    <div className={style.container}>
+      {currentProducts &&
+        currentProducts.map((c) => (
+          <ProductCard
+            name={c.name}
+            price={c.price}
+            id={c.id}
+            images={c.images}
+            key={c.id}
+            productId={c.id}
+            onSelectProduct={handleProductSelect} // Pasar la función handleProductSelect como prop
+          />
+        ))}
+    </div>
+  );
 }

@@ -1,23 +1,26 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import s from './ProductCard.module.css'; // Asegúrate de tener el archivo CSS correspondiente
 
 
 
-function ProductCard({ id, name, price, images }) {
-const imageUrl = images && images.length > 0 ? images[0] : '';
+const ProductCard = ({ name, price, id, images, onSelectProduct, productId }) => {
+  const handleCardClick = () => {
+    const product = { name, price, id, images }; // Crear un objeto que representa el producto seleccionado
+    onSelectProduct(product); // Llamar a la función onSelectProduct y pasar el producto seleccionado
+  };
+
+  const imageUrl = images && images.length > 0 ? images[0] : '';
 
   return (
     <div className={s.card}>
      <div className={s.img}>
       <img src={imageUrl} alt={name}  />
          <div className={s.overlay}>
-            <Link to={`/products/${id}`} className={s.detail}>
-               <button>Ver más</button>
-            </Link>
+         <Link to={`/products/${productId}`}>Ver detalles</Link>
+
          </div>
-      <div className={s.content}>
+      <div onClick={handleCardClick} className={s.content}>
         <h3 className={s.name}>{name}</h3>
         <p className={s.price}>{price}</p>
       </div>
@@ -25,9 +28,7 @@ const imageUrl = images && images.length > 0 ? images[0] : '';
          <Link to={`/products/${id}`} className={s.detail}>
             <span>Ver más</span>
          </Link>
-      {/* <Router basename={`/products/${id}`} className={s.detail}>
-        <span>Ver más</span>
-      </Router> */}
+     
     </div>
   );
 };

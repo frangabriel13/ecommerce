@@ -3,18 +3,27 @@
   /* gap: 2rem; */
   /* padding: 5.5rem 5%; */
 }
+.divPhotos {
+  display: flex;
+  
+}
+.divImage .gallery {
+  flex: 1;
+  padding: 2rem;
+}
 
 .divImage {
   overflow: hidden;
+  width: 60rem;
 }
 
 .productoDetail {
-  flex: 0 0 40%;
-  max-width: 40%;
+  width: 60rem;
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
 }
 
 .productoDetailName {
@@ -93,6 +102,7 @@
   margin-top: 2rem;
 }
 .gallery {
+  max-width: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
