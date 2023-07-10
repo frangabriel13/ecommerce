@@ -7,6 +7,7 @@ import s from './ProductStore.module.css';
 
 function ProductStore() {
   const allProducts = useSelector(state => state.products.allProducts);
+  console.log(allProducts)
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(12);
   const lastIndexProduct = currentPage * productsPerPage;
@@ -14,6 +15,7 @@ function ProductStore() {
   const dispatch = useDispatch();
   const [categoryFilter, setCategoryFilter] = useState('');
   const [sortOrder, setSortOrder] = useState('');
+  
 
   let currentProducts = [];
 
@@ -23,7 +25,7 @@ function ProductStore() {
     dispatch(getProducts());
   }, [dispatch]);
   
- 
+  
 
   function handleSortChange(e) {
     e.preventDefault()

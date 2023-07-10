@@ -11,6 +11,23 @@ export const getProducts = () => {
   };
 };
 
+export const getProductById = (productId) => {
+  return async function(dispatch) {
+    try {
+      const response = await instance.get(`products/${productId}`);
+      dispatch({
+        type: 'GET_PRODUCT_BY_ID',
+        payload: response.data
+      });
+      return response.data; // Devuelve los datos del producto
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      throw error;
+    }
+  };
+}
+
+
 export function orderByPrice(payload) {
   return {
     type: 'ORDER_BY_PRICE',
