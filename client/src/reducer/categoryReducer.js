@@ -1,6 +1,7 @@
 const initialState = {
   categories: [],
-  allCategories: []
+  allCategories: [],
+  category: []
 }
 
 function categoryReducer(state = initialState, action) {
@@ -19,6 +20,11 @@ function categoryReducer(state = initialState, action) {
       return {
         ...state,
         categories: state.categories.filter(category => category.id !== action.payload)
+      }
+    case 'GET_CATEGORY':
+      return {
+        ...state,
+        category: action.payload
       }
     default: return state;
   }

@@ -6,10 +6,6 @@ import { combineReducers } from "redux";
 const rootReducer = combineReducers({
   products: productReducer,
   categories: categoryReducer,
-    // canchas: canchasReducer,
-    // reservas: reservasReducer,
-    // user: userReducer,
-    // reviews: reviewsReducer,
 })
 
 export default rootReducer;
