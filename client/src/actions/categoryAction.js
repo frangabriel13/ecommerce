@@ -31,3 +31,17 @@ export const deleteCategory = (id) => {
     }
   }
 }
+
+export const getCategory = (id) => {
+  return async function(dispatch) {
+    try {
+      let category = await instance.get("categories/" + id);
+      return dispatch({
+        type: 'GET_CATEGORY',
+        payload: category.data
+      })
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}

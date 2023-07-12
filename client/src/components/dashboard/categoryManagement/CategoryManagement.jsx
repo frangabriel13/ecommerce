@@ -1,11 +1,37 @@
-import React from "react";
-import { useEffect } from "react";
+// import React from "react";
+// import s from "./CategoryManagement.module.css";
+// import { useSelector, useDispatch } from "react-redux";
+// import { getCategories, postCategory, deleteCategory, getCategory } from "../../../actions/categoryAction";
+
+// function CategoryManagement() {
+//   const categories = useSelector((state) => state.categories.categories.data);
+//   const category = useSelector((state) => state.categories.category.data);
+//   const dispatch = useDispatch();
+
+//   return(
+//    <div className={s.container}>
+//   </div> 
+//   )
+// }
+
+
+// export default CategoryManagement;
+
+import React, { useState, useEffect } from "react";
+import s from "./CategoryManagement.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories, postCategory, deleteCategory } from "../../../actions/categoryAction";
-import s from './CategoryManagement.module.css';
+import {
+  getCategories,
+  postCategory,
+  deleteCategory,
+  getCategory,
+} from "../../../actions/categoryAction";
 
 function CategoryManagement() {
-  const categories = useSelector((state) => state.categories.categories.data);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [newCategoryOrder, setNewCategoryOrder] = useState(0);
+  const categories = useSelector((state) => state.categories.categories);
+  const category = useSelector((state) => state.categories.category);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,88 +39,64 @@ function CategoryManagement() {
   }, [dispatch]);
 
   const handleAddCategory = async () => {
-    const categoryName = document.getElementById("categoryName").value.trim();
-
-    if (categoryName === "") {
-      alert('El nombre de categoría no puede estar vacío');
-      return;
-    }
-
-    const sortedCategories = [...categories].sort((a, b) => b.order - a.order);
-    const lastOrder = sortedCategories.length > 0 ? sortedCategories[0].order : 0;
-
-    const payload = {
-      name: categoryName.toLowerCase(),
-      order: lastOrder + 1
-    };
-  
-    try {
-      const response = await dispatch(postCategory(payload));
-      dispatch(getCategories());
-      document.getElementById("categoryName").value = "";
-    } catch (error) {
-      if (error.response && error.response.status === 500) {
-        alert('Categoría ya existente')
-      } else {
-        console.log(error)
-      }
-    }
+    await dispatch(
+      postCategory({ name: newCategoryName, order: newCategoryOrder })
+    );
+    setNewCategoryName("");
+    setNewCategoryOrder(0);
+    dispatch(getCategories());
   };
 
-  const handleDeleteCategory = async (id) => {
-    await dispatch(deleteCategory(id));
+  const handleDeleteCategory = async (categoryId) => {
+    await dispatch(deleteCategory(categoryId));
     dispatch(getCategories());
-  }
+  };
+
+  const handleCategoryClick = async (categoryId) => {
+    await dispatch(getCategory(categoryId));
+  };
+
+  console.log(category);
 
   return (
     <div className={s.container}>
-      <h2>Categorías</h2>
-      <div className={s.categoryContainer}>
-
-        <div className={s.categories}>
-          <div className={s.search}>
-            <input id="categoryName" type="text" placeholder="Nombre..." />
-            <button onClick={(e) => handleAddCategory(e)}>Agregar</button>
-          </div>
-          <div className={s.categoryList}>
-            <div className={s.level1}>
-              {categories && categories.map(category => (
-                <div key={category.id}>
-                  <button className={s.categoryName}>{category.name}</button>
-                  <button className={s.deleteButton} onClick={() => handleDeleteCategory(category.id)}>X</button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className={s.category}>
-          <h3>Pantalones</h3>
-          <div className={s.categoryInfo}>
-            <label>
-              Nombre:
-              <input type="text" />
-            </label>
-            <label>
-              Categoría padre:
-              <select>
-                {/* Renderizar opciones de categorías padre */}
-              </select>
-            </label>
-          </div>
-          <div className={s.subcategories}>
-            <h4>Subcategorías:</h4>
-            {/* Renderizar subcategorías de la categoría seleccionada */}
-          </div>
-          <button>Eliminar categoría</button>
-          <button>Guardar cambios</button>
-        </div>
+      <div className={s.addCategory}>
+        <input
+          type="text"
+          placeholder="Enter category name"
+          value={newCategoryName}
+          onChange={(e) => setNewCategoryName(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Enter category order"
+          value={newCategoryOrder}
+          onChange={(e) => setNewCategoryOrder(parseInt(e.target.value))}
+        />
+        <button onClick={handleAddCategory}>Add</button>
       </div>
-      <button>Cancelar</button>
-      <button>Guardar cambios</button>
+      <div className={s.categories}>
+        {categories && categories.map((category) => (
+          <div key={category.id} className={s.category}>
+            <button onClick={() => handleCategoryClick(category.id)}>
+              {category.name}
+            </button>
+            <button onClick={() => handleDeleteCategory(category.id)}>
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
+      {category !== null && typeof category !== 'undefined' ? (
+        <div className={s.selectedCategory}>
+          <h3>{category.name}</h3>
+        </div>
+      ) : <div>
+        <h2>loading...</h2>
+      </div>
+    }
     </div>
   );
 }
-
 
 export default CategoryManagement;
