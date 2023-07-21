@@ -1,3 +1,22 @@
+/* .container {
+  display: flex;
+  flex-direction: column;
+} */
+
 .categoryContainer {
   display: flex;
+  flex: 1;
+}
+
+.catContainer, .subCatContainer, .subSubCatContainer {
+  flex: 1;
+}
+.catContainer {
+  background-color: antiquewhite;
+}
+.subCatContainer {
+  background-color: beige;
+}
+.subSubCatContainer {
+  background-color: bisque;
 }
