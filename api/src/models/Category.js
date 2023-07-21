@@ -7,9 +7,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true
     },
-    // order: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
+    
   }, { timestamps: false })
 }
