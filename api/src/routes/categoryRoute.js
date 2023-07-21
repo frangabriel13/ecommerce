@@ -71,13 +71,12 @@ router.get('/categories/:id', async (req, res) => {
 });
 
 router.post("/categories", async (req, res) => {
-  let { name, parentId, order } = req.body;
+  let { name, parentId } = req.body;
 
   try {
     let createCategory = await Category.create({
       name,
-      parentId,
-      order
+      parentId
     });
     res.status(201).json(createCategory);
   } catch(error) {

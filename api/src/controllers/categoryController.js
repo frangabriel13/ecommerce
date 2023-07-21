@@ -27,7 +27,7 @@ const getCategoryId = async (id) => {
 
 const updateCategory = async (req, res) => {
   const { id } = req.params;
-  const { name, parentId, order } = req.body;
+  const { name, parentId } = req.body;
   try {
     const category = await Category.findByPk(id);
     if (!category) {
@@ -36,7 +36,7 @@ const updateCategory = async (req, res) => {
 
     category.name = name || category.name;
     category.parentId = parentId !== undefined ? parentId : category.parentId;
-    category.order = order || category.order;
+    // category.order = order || category.order;
     await category.save();
 
     res.status(200).json({ message: "Categoría actualizada con éxito" });
