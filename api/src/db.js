@@ -43,6 +43,9 @@ Variation.belongsTo(Product);
 Category.belongsTo(Category, { as: 'parentCategory', foreignKey: 'parentId' });
 Category.hasMany(Category, { as: 'subcategories', foreignKey: 'parentId' });
 
+Product.belongsToMany(Category, { through: 'category_product', as: 'categories', foreignKey: 'productId' });
+Category.belongsToMany(Product, { through: 'category_product', as: 'products', foreignKey: 'categoryId' });
+
 
 module.exports = {
   ...sequelize.models,
