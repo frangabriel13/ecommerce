@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import s from "./Header.module.css"
-import logo from "../../assets/Rumay.png"
+import s from "./Header.module.css";
+import logo from "../../assets/Rumay.png";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,14 +13,23 @@ function Header() {
 
   return (
     <div className={s.container}>
-        <a href='#'>
-          <img src={logo} className={s.logo} />
-        </a>
+        <NavLink to={"/"}>
+                   <img src={logo} className={s.logo} />
+           </NavLink>
+          
+        
         <div className={s.nav}>
           <nav>
-            <a href='#'>Inicio</a>
-            <a href='#'>¿Cómo comprar?</a>
-            <a href='#'>Tienda</a>
+          <NavLink to={"/"}>
+                   Inicio
+           </NavLink>
+           <NavLink to={"/tienda"}>
+                   Tienda
+           </NavLink>
+           <NavLink to={"/como-comprar"}>
+                   ¿Cómo comprar?
+           </NavLink>
+           
             <a href='#'>Categorías</a>
             <a href='#'>Contacto</a>
           </nav>

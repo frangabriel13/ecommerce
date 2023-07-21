@@ -2,7 +2,7 @@ import ProductCard from '../productCard/ProductCard';
 import style from './ProductCards.module.css';
 import React, { useState } from 'react';
 
-export default function ProductCards({ currentProducts }) {
+export default function ProductCards({ products }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleProductSelect = (product) => {
@@ -11,8 +11,8 @@ export default function ProductCards({ currentProducts }) {
 
   return (
     <div className={style.container}>
-      {currentProducts &&
-        currentProducts.map((c) => (
+      {products &&
+        products.map((c) => (
           <ProductCard
             name={c.name}
             price={c.price}

@@ -5,7 +5,7 @@ export const getProducts = () => {
     const products = await instance.get("products");
     dispatch({
       type: 'GET_PRODUCTS',
-      payload: products,
+      payload: products.data,
     });
     return products;
   };
@@ -39,5 +39,5 @@ export function setCategoryFilter (payload) {
   return {
     type: 'SET_CATEGORY_FILTER',
     payload
-  };
+  }; 
 };

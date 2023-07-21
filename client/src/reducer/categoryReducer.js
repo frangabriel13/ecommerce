@@ -1,7 +1,9 @@
 const initialState = {
   categories: [],
   allCategories: [],
-  category: []
+  category: [],
+  items: [],
+  filteredItems: [],
 }
 
 function categoryReducer(state = initialState, action) {
@@ -12,7 +14,7 @@ function categoryReducer(state = initialState, action) {
         categories: action.payload,
         allCategories: action.payload
       }
-    case 'POST_POKEMON':
+    case 'POST_CATEGORY':
       return {
         ...state
       }
@@ -26,6 +28,15 @@ function categoryReducer(state = initialState, action) {
         ...state,
         category: action.payload
       }
+      
+    case 'FILTER_PRODUCTS':
+            const filteredProducts = state.items.filter((product) => product.category === action.payload);
+            return {
+              ...state,
+              filteredItems: filteredProducts,
+            }
+          
+     
     default: return state;
   }
 }
