@@ -1,19 +1,26 @@
-/* .container {
-  display: flex;
-  flex-direction: column;
-} */
+.container {
+  margin: .5rem;
+}
 
 .categoryContainer {
   display: flex;
   flex: 1;
 }
 
+/* .categoryContainer h3 {
+
+} */
+
 .catContainer, .subCatContainer, .subSubCatContainer {
   flex: 1;
+  border-radius: .8rem;
+  margin: .5rem;
+  padding: .5rem 1rem;
 }
 .catContainer {
   background-color: antiquewhite;
 }
+
 .subCatContainer {
   background-color: beige;
 }

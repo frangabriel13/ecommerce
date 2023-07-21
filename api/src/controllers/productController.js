@@ -1,4 +1,4 @@
-const { Product } = require('../db');
+const { Product, Category } = require('../db');
 const { Op } = require("sequelize");
 
 const getProduct = async (req, res) => {
@@ -13,10 +13,25 @@ const getProduct = async (req, res) => {
             { name: { [Op.iLike]: `%${name}%` } },
             { name: { [Op.iLike]: `%${name.split(" ").join("%")}%` } }
           ]
-        }
+        },
+        include: [
+          {
+            model: Category,
+            as: 'categories',
+            attributes: ['name']
+          }
+        ]
       });
     } else {
-      products = await Product.findAll();
+      products = await Product.findAll({
+        include: [
+          {
+            model: Category,
+            as: 'categories',
+            attributes: ['name']
+          }
+        ]
+      });
     }
     
     return products;
