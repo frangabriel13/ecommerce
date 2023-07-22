@@ -4,18 +4,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProducts, orderByPrice, setCategoryFilter } from '../../actions/productActions';
 import ProductCards from '../productCards/ProductCards';
 import s from './ProductStore.module.css';
+import { getCategories} from '../../actions/categoryAction';
 
 function ProductStore() {
 
   const dispatch = useDispatch();
-
+  const categories = useSelector(state => state.categories.allCategories.data)
+  console.log(categories)
   const products = useSelector(state => state.products.allProducts);
-  console.log(products)
+ 
   // const sortedProducts = useSelector(state => state.products.filteredItems);
   const sortOrder = useSelector(state => state.products.sortOrder);
 
   useEffect(() => {
     dispatch(getProducts()); 
+    dispatch(getCategories());
   }, [dispatch]);
 
   const handleSortChange = order => {
@@ -36,6 +39,13 @@ function ProductStore() {
           <option value="price_desc">Precio descendente</option>
         </select>
       </div>
+      <div className={s.categoryList}>
+      <ul>
+      {categories && categories.map(category => (
+      <li key={category.id}>{category.name}</li>
+    ))}
+      </ul>
+    </div>
 
       <ProductCards products={ products } />
 

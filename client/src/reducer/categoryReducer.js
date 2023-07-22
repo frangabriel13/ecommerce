@@ -11,8 +11,9 @@ function categoryReducer(state = initialState, action) {
     case 'GET_CATEGORIES':
       return {
         ...state,
+        allCategories: action.payload,
         categories: action.payload,
-        allCategories: action.payload
+        
       }
     case 'POST_CATEGORY':
       return {
