@@ -45,21 +45,21 @@ const CategoryManagement = () => {
       <div className={s.categoryContainer}>
         <div className={s.catContainer}>
           <h3>Categorías</h3>
-          <div>
+          <div className={s.divAddCat}>
             <input type="text" 
               placeholder='Nombre...' 
               value={categoryName} 
               onChange={(e) => setCategoryName(e.target.value)} 
             />
-            <button onClick={() => handlePostCategory()}>+</button>
+            <button className={s.btnAddCategory} onClick={() => handlePostCategory()}>+</button>
           </div>
-          {error && <div>{error}</div>}
-          <div>
+          {error && <div className={s.errorAddCat}>{error}</div>}
+          <div className={s.categoryList}>
             {
               categories && categories.map((el) => (
-                <div key={el.id}>
-                  <button onClick={() => handleSelectCategory(el.id)}>{formatName(el.name)}</button>
-                  <button onClick={() => handleDeleteCategory(el.id)}>X</button>
+                <div className={s.divCategory} key={el.id}>
+                  <button className={s.btnCategory} onClick={() => handleSelectCategory(el.id)}>{formatName(el.name)}</button>
+                  <button className={s.btnDeleteCategory} onClick={() => handleDeleteCategory(el.id)}>X</button>
                 </div>
               ))
             }
