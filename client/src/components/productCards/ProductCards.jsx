@@ -2,7 +2,8 @@ import ProductCard from '../productCard/ProductCard';
 import style from './ProductCards.module.css';
 import React, { useState } from 'react';
 
-export default function ProductCards({ products }) {
+export default function ProductCards( {products} ) {
+
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleProductSelect = (product) => {

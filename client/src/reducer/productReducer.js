@@ -1,9 +1,9 @@
 const initialState = {
   products: [],
   allProducts: [],
-  filteredProducts: [],
-  category: '',
-  productById: [],
+ 
+  // category: '',
+  // productById: [],
   sortOrder: 'relevance',
 };
 
@@ -40,11 +40,23 @@ function productReducer(state = initialState, action) {
     sortOrder: action.payload,
   };
       
-    case 'SET_CATEGORY_FILTER':
-      const { allProducts } = state;
-      const filteredProducts = allProducts && allProducts.data ? allProducts.data.filter(
-        (product) => product.category === action.payload
-      ) : [];
+  case 'SET_CATEGORY_FILTER':
+    const allProducts = state.allProducts;
+    
+    const filteredProducts = action.payload === 'All'
+      ? allProducts
+      : allProducts.filter(product => product.categories.some(category => category.name === action.payload));
+   
+    return {
+      ...state,
+      products: filteredProducts,
+    };
+
+      // const filteredProducts = allProducts ? allProducts.filter(
+      
+      //   (product) => product.category === action.payload
+      // ) : [];
+     
       return {
         ...state,
         products: filteredProducts,
