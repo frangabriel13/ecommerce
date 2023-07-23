@@ -1,29 +1,127 @@
 .container {
-  margin: .5rem;
+  margin: 1rem 2.5rem;
 }
 
-.categoryContainer {
+.container h2 {
+  font-size: 1.8rem;
+  padding-bottom: 1rem;
+}
+
+.divCategories {
   display: flex;
-  flex: 1;
+  gap: 2rem;
+  align-items: center;
 }
 
-/* .categoryContainer h3 {
+.divTable {
+  width: 70%;
+}
 
-} */
+.categories {
+  list-style: none;
+  display: flex;
+}
 
-.catContainer, .subCatContainer, .subSubCatContainer {
-  flex: 1;
-  border-radius: .8rem;
-  margin: .5rem;
+.categories li {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  font-size: 1.2rem;
+}
+
+.categories li:hover {
+  background-color: #f2f2f2;
+}
+
+.listCategories {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 0 .3rem .3rem .3rem;
+  box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+.table th {
+  font-size: 1.2rem;
+}
+
+.table td {
+  text-align: center;
+  border-bottom: 0.1rem solid #ebebeb;
+  font-size: 1.2rem;
+  padding: 1rem 0;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.nameHeader {
+  text-align: left;
+}
+
+.btnsCategory button {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+
+
+
+
+/* FORMULARIO */
+.divForm {
+  margin-top: 4rem;
+  align-self: flex-start;
+  width: 30%;
+  border-radius: .3rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1);
+}
+
+.divForm h3 {
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.form label {
+  font-size: 1.2rem;
+}
+
+.selectForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.divBtnForm {
+  margin: 1rem 0;
+  text-align: end;
+}
+.btnForm {
+  background-color: #94a3d8;
+  font-size: 1.4rem;
   padding: .5rem 1rem;
+  border-radius: .2rem;
 }
-.catContainer {
-  background-color: antiquewhite;
-}
-
-.subCatContainer {
-  background-color: beige;
-}
-.subSubCatContainer {
-  background-color: bisque;
+.btnForm:hover {
+  background-color: #a2b0e0;
 }
