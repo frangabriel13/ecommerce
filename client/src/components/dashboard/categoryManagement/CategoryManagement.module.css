@@ -1,3 +1,4 @@
+/* COFIGURACIÓN GENERAL */
 .container {
   margin: 1rem 2.5rem;
 }
@@ -13,6 +14,9 @@
   align-items: center;
 }
 
+
+
+/* TABLA */
 .divTable {
   width: 70%;
 }
@@ -70,6 +74,9 @@
   font-size: 1.2rem;
 }
 
+
+
+/* SUBCATEGORÍAS */
 
 
 
