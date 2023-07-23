@@ -323,6 +323,7 @@ const CategoryManagement = () => {
                 onChange={(e) => setCategoryName(e.target.value)}  
               />
             </div>
+            {error && <div className={s.errorAddCat}>{error}</div>}
             <div className={s.selectForm}>
               <label>Categoría padre</label>
               <select>

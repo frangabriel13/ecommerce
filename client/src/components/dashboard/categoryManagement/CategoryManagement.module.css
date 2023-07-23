@@ -125,3 +125,7 @@
 .btnForm:hover {
   background-color: #a2b0e0;
 }
+
+.errorAddCat {
+  color: rgb(199, 25, 25);
+}
