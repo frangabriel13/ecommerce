@@ -10,10 +10,19 @@ export const getCategories = () => {
     return categories;
   };
 };
-export const filterProducts = (category) => ({
-  type: 'FILTER_PRODUCTS',
-  payload: category, // Assuming you want to filter by category
-});
+// export const setCategoryFilter = (category) => ({
+//   type: 'SET_CATEGORY_FILTER',
+//   payload: category,
+// });
+
+export function setCategoryFilter(category){
+  return async function(dispatch){
+      return dispatch({
+          type:'SET_CATEGORY_FILTER',
+          payload:category
+      })
+  }
+}
 
 export const postCategory = (payload) => {
   return async function(dispatch) {
