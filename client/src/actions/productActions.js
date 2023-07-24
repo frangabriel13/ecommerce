@@ -26,6 +26,10 @@ export const getProductById = (productId) => {
     }
   };
 }
+export const searchProducts = (searchTerm) => ({
+  type: 'SEARCH_PRODUCTS',
+  payload: searchTerm,
+});
 
 
 export function orderByPrice(payload) {

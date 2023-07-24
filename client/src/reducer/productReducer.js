@@ -1,6 +1,7 @@
 const initialState = {
   products: [],
   allProducts: [],
+  searchTerm: '',
  
   // category: '',
   // productById: [],
@@ -19,9 +20,19 @@ function sortProducts(products, order) {
     return products.sort((a, b) => b.price - a.price);
   }
 }
+// Función para realizar la búsqueda de productos
+function searchProducts(products, searchTerm) {
+  const keyword = searchTerm.trim().toLowerCase();
+  return products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(keyword) ||
+      product.description.toLowerCase().includes(keyword)
+  );
+}
 
 function productReducer(state = initialState, action) {
   switch (action.type) {
+
     case 'GET_PRODUCTS':
       return {
         ...state,
@@ -33,34 +44,32 @@ function productReducer(state = initialState, action) {
         ...state,
         productById: action.payload,
       };
-      case 'ORDER_BY_PRICE':
-  return {
-    ...state,
-    filteredItems: sortProducts(state.products, action.payload),
-    sortOrder: action.payload,
-  };
-      
-  case 'SET_CATEGORY_FILTER':
-    const allProducts = state.allProducts;
-    
-    const filteredProducts = action.payload === 'All'
-      ? allProducts
-      : allProducts.filter(product => product.categories.some(category => category.name === action.payload));
+    case 'ORDER_BY_PRICE':
+          const sortedProducts = sortProducts(state.products, action.payload);
+          console.log(sortedProducts);
+              return {
+                    ...state,
+                  products: [...sortedProducts],
+                };
+    case 'SEARCH_PRODUCTS':
+          const searchResult = searchProducts(state.allProducts, action.payload);
+              return {
+                  ...state,
+                  products: [...searchResult],
+                };
    
-    return {
-      ...state,
-      products: filteredProducts,
-    };
+    case 'SET_CATEGORY_FILTER':
+          const allProducts = state.allProducts;
+    
+            const filteredProducts = action.payload === 'All'
+             ? allProducts
+             : allProducts.filter(product => product.categories.some(category => category.name === action.payload));
+   
+              return {
+                  ...state,
+                  products: filteredProducts,
+              };
 
-      // const filteredProducts = allProducts ? allProducts.filter(
-      
-      //   (product) => product.category === action.payload
-      // ) : [];
-     
-      return {
-        ...state,
-        products: filteredProducts,
-      };
     default:
       return state;
   }
