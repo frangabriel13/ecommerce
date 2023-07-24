@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import s from './CategoryManagement.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories, deleteCategory, postCategory, getCategory } from '../../../actions/categoryAction';
+import { getCategories, deleteCategory, postCategory, filterCategories } from '../../../actions/categoryAction';
 import { formatName } from '../../../utils/helpers';
 
 const CategoryManagement = () => {
-  const categories = useSelector((state) => state.categories.categories.data);
+  const categories = useSelector((state) => state.categories.categories);
+  const allCategories = useSelector((state) => state.categories.allCategories);
   const category = useSelector((state) => state.categories.category);
   const [selectedTab, setSelectedTab] = useState('categories');
   const [categoryName, setCategoryName] = useState('');
-  const [parentCategory, setParentCategory] = useState(null);
+  const [parentCategory, setParentCategory] = useState('');
+  const [parentSelect, setParentSelect] = useState('');
   const [error, setError] = useState('');
   const dispatch = useDispatch();
 
@@ -19,6 +21,13 @@ const CategoryManagement = () => {
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
+    if (tab === 'subcategories') {
+      const firstCategory = allCategories.find((el) => el.parentId === null);
+      if(firstCategory) {
+        setParentSelect(firstCategory.id);
+        dispatch(filterCategories(firstCategory.id));
+      }
+    }
   };
 
   const handlePostCategory = async () => {
@@ -29,7 +38,7 @@ const CategoryManagement = () => {
     } else if (categoryExist) {
       setError('La categoría ya existe');
     } else {
-      await dispatch(postCategory({ name: categoryName.trim(), parentId: parentCategory }));
+      await dispatch(postCategory({ name: categoryName.trim(), parentId: parentCategory === "" ? null : parentCategory }));
       setCategoryName('');
       setParentCategory('');
       setError('');
@@ -40,6 +49,11 @@ const CategoryManagement = () => {
   const handleDeleteCategory = async (id) => {
     await dispatch(deleteCategory(id));
     dispatch(getCategories());
+  }
+
+  const handleFilterCategories = (id) => {
+    setParentSelect(id);
+    dispatch(filterCategories(id));
   }
 
   return(
@@ -76,7 +90,7 @@ const CategoryManagement = () => {
                   </thead>
                   <tbody>
                     {
-                      categories && categories.map((el, index) => (
+                      allCategories && allCategories.map((el, index) => (
                         el.parentId === null && (
                           <tr key={el.id}>
                             <td>{index + 1}</td>
@@ -97,9 +111,9 @@ const CategoryManagement = () => {
           {
             selectedTab === 'subcategories' && (
               <div className={s.listCategories}>
-                <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
+                <select onChange={(e) => handleFilterCategories(e.target.value)}>
                   {
-                    categories && categories.filter((el) => el.parentId === null).map((el) => (
+                    allCategories && allCategories.filter((el) => el.parentId === null).map((el) => (
                       <option value={el.id} key={el.id}>{el.name}</option>
                     ))
                   }
@@ -113,17 +127,15 @@ const CategoryManagement = () => {
                   </thead>
                   <tbody>
                     {
-                      categories && categories.map((el, index) => (
-                        el.parentId === parentCategory && (
-                          <tr key={el.id}>
-                            <td>{index + 1}</td>
-                            <td style={{ textAlign: 'left' }}>{formatName(el.name)}</td>
-                            <td className={s.btnsCategory} style={{ textAlign: 'right' }}>
-                              <button>Editar</button>
-                              <button onClick={() => handleDeleteCategory(el.id)}>Eliminar</button>
-                            </td>
-                          </tr>
-                        )
+                      categories && categories.map((el, index) => ( 
+                        <tr key={el.id}>
+                          <td>{index + 1}</td>
+                          <td style={{ textAlign: 'left' }}>{formatName(el.name)}</td>
+                          <td className={s.btnsCategory} style={{ textAlign: 'right' }}>
+                            <button>Editar</button>
+                            <button onClick={() => handleDeleteCategory(el.id)}>Eliminar</button>
+                          </td>
+                        </tr>                        
                       ))
                     }
                   </tbody> 
@@ -147,9 +159,9 @@ const CategoryManagement = () => {
             <div className={s.selectForm}>
               <label>Categoría padre</label>
               <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
-                <option value={null}>Ninguno</option>
+                <option value={''}>Ninguno</option>
                 {
-                  categories && categories.map((el) => (
+                  allCategories && allCategories.map((el) => (
                     <option value={el.id} key={el.id}>{el.name}</option>
                   ))
                 }

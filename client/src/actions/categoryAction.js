@@ -5,15 +5,11 @@ export const getCategories = () => {
     const categories = await instance.get("categories");
     dispatch({
       type: 'GET_CATEGORIES',
-      payload: categories,
+      payload: categories.data,
     });
     return categories;
   };
 };
-// export const setCategoryFilter = (category) => ({
-//   type: 'SET_CATEGORY_FILTER',
-//   payload: category,
-// });
 
 export function setCategoryFilter(category){
   return async function(dispatch){
@@ -56,5 +52,12 @@ export const getCategory = (id) => {
     } catch(error) {
       console.log(error);
     }
+  }
+}
+
+export const filterCategories = (payload) => {
+  return {
+    type: 'FILTER_CATEGORIES',
+    payload
   }
 }
