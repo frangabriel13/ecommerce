@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getProducts, orderByPrice, setCategoryFilter } from '../../actions/productActions';
+import { getProducts, orderByPrice, setCategoryFilter, searchProducts } from '../../actions/productActions';
 import ProductCards from '../productCards/ProductCards';
 import s from './ProductStore.module.css';
 import { getCategories } from '../../actions/categoryAction';
@@ -10,10 +10,10 @@ function ProductStore() {
 
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories.allCategories.data)
-  console.log(categories);
+
   const products = useSelector(state => state.products.products);
   const sortOrder = useSelector(state => state.products.sortOrder);
-  
+  const [searchTerm, setSearchTerm] = useState('');
   // const sortedProducts = useSelector(state => state.products.filteredItems);
   
 
@@ -29,11 +29,23 @@ function ProductStore() {
 const handleCategoryChange = (category) => {  
   dispatch(setCategoryFilter(category));
 };
+
+const handleSearch = () => {
+  dispatch(searchProducts(searchTerm));
+};
   
   
   return (
     <div className={s.productStore}>
-
+       <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search products..."
+      />
+      <button onClick={handleSearch}>Search</button>
+    </div>
       <div className={s.filterWrapper}>
         <select 
           id="sortOrder"
