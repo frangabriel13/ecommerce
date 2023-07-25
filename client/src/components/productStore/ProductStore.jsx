@@ -12,6 +12,7 @@ function ProductStore() {
   const categories = useSelector(state => state.categories.allCategories.data)
 
   const products = useSelector(state => state.products.products);
+  console.log(products);
   const sortOrder = useSelector(state => state.products.sortOrder);
   const [searchTerm, setSearchTerm] = useState('');
   // const sortedProducts = useSelector(state => state.products.filteredItems);
