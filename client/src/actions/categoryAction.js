@@ -61,3 +61,17 @@ export const filterCategories = (payload) => {
     payload
   }
 }
+
+export const putCategory = (payload) => {
+  return async function(dispatch) {
+    try {
+      const response = await instance.put(`categories/${payload.id}`, payload);
+      dispatch({
+        type: 'PUT_CATEGORY',
+        payload: response.data
+      })
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}

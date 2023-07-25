@@ -34,6 +34,14 @@ function categoryReducer(state = initialState, action) {
         ...state,
         categories: categoryFiltered
       }
+    case 'PUT_CATEGORY':
+      const updatedCategory = action.payload;
+      return {
+        ...state,
+        categories: state.categories.map((category) => 
+          category.id === updatedCategory.id ? updatedCategory : category
+        )
+      }
     default: return state;
   }
 }
