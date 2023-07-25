@@ -20,12 +20,24 @@ function Header() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const inputRef = useRef(null); // Referencia al input search para posicionar la ventana emergente
+  const searchResultsRef = useRef(null); // Referencia a la ventana emergente
+
   const [showResults, setShowResults] = useState(false);
   const navbarSearchResults = useSelector(state => state.products.navbarSearchResults); 
 
   useEffect(() => {
-    dispatch(getProducts()); 
-   
+    dispatch(getProducts());
+    const handleDocumentClick = (e) => {
+      // Si el clic ocurre fuera de la ventana emergente, cerrarla
+      if (searchResultsRef.current && !searchResultsRef.current.contains(e.target)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
   }, [dispatch]);
 
   const handleSearchInputChange = (e) => {
@@ -33,7 +45,7 @@ function Header() {
     setSearchTerm(term);
 
     dispatch(searchProductsHeader(term));
-    setShowResults(true); // Mostrar la ventana emergente cuando se escribe en el input
+    setShowResults(true);
   };
 
   const handleSearchInputKeyPress = (e) => {
@@ -80,6 +92,9 @@ function Header() {
           <i className={`bi bi-search ${s.icon}`}></i>
           <input
             ref={inputRef} // Asociamos la referencia al input
+            onClick={() => {
+              setShowResults(true);
+            }} 
             className='search-input'
             type="text"
             value={searchTerm}
@@ -88,7 +103,7 @@ function Header() {
             placeholder="Search products..."
           />
           {showResults && (
-  <div className={s.searchResults}>
+  <div ref={searchResultsRef} className={s.searchResults}>
 
     {navbarSearchResults.length === 0 && (
       <div>no andaaaaaaaaa</div>
