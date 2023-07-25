@@ -12,6 +12,7 @@ const CategoryManagement = () => {
   const [categoryName, setCategoryName] = useState('');
   const [parentCategory, setParentCategory] = useState('');
   const [parentSelect, setParentSelect] = useState('');
+  const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
 
@@ -72,11 +73,11 @@ const CategoryManagement = () => {
               onClick={() => handleTabChange('subcategories')}>
               Subcategorías
             </li>
-            <li 
+            {/* <li 
               className={selectedTab === 'sub-subcategories' ? 'active' : ''}
               onClick={() => handleTabChange('sub-subcategories')}>
               Sub-subcategorías
-            </li>
+            </li> */}
           </ul>
           {
             selectedTab === 'categories' && (
@@ -144,34 +145,67 @@ const CategoryManagement = () => {
             )
           }                            
         </div>
-
-        <div className={s.divForm}>
-          <h3>Crear categoría</h3>
-          <div className={s.form}>
-            <div className={s.nameForm}>
-              <label>Nombre</label>
-              <input type="text" 
-                value={categoryName} 
-                onChange={(e) => setCategoryName(e.target.value)}  
-              />
-              {error && <div className={s.errorAddCat}>{error}</div>}
+        {
+          editMode ? (
+            <div className={s.divForm}>
+              <h3>Editar categoría</h3>
+              <div className={s.form}>
+                <div className={s.nameForm}>
+                  <label>Nombre</label>
+                  <input type="text" 
+                    value={categoryName} 
+                    onChange={(e) => setCategoryName(e.target.value)}  
+                  />
+                {error && <div className={s.errorAddCat}>{error}</div>}
+              </div>
+              <div className={s.selectForm}>
+                <label>Categoría padre</label>
+                <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
+                  <option value={''}>Ninguno</option>
+                  {
+                    allCategories && allCategories.map((el) => (
+                      el.parentId === null && (
+                      <option value={el.id} key={el.id}>{el.name}</option>
+                    )))
+                  }
+                </select>
+              </div>           
             </div>
-            <div className={s.selectForm}>
-              <label>Categoría padre</label>
-              <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
-                <option value={''}>Ninguno</option>
-                {
-                  allCategories && allCategories.map((el) => (
-                    <option value={el.id} key={el.id}>{el.name}</option>
-                  ))
-                }
-              </select>
-            </div>           
+            <div className={s.divBtnForm}>
+              <button className={s.btnForm} onClick={() => handlePostCategory()}>Añadir</button>
+            </div>
           </div>
-          <div className={s.divBtnForm}>
-            <button className={s.btnForm} onClick={() => handlePostCategory()}>Añadir</button>
+          ) : (
+          <div className={s.divForm}>
+            <h3>Crear categoría</h3>
+            <div className={s.form}>
+              <div className={s.nameForm}>
+                <label>Nombre</label>
+                <input type="text" 
+                  value={categoryName} 
+                  onChange={(e) => setCategoryName(e.target.value)}  
+                />
+                {error && <div className={s.errorAddCat}>{error}</div>}
+              </div>
+              <div className={s.selectForm}>
+                <label>Categoría padre</label>
+                <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
+                  <option value={''}>Ninguno</option>
+                  {
+                    allCategories && allCategories.map((el) => (
+                      el.parentId === null && (
+                      <option value={el.id} key={el.id}>{el.name}</option>
+                    )))
+                  }
+                </select>
+              </div>           
+            </div>
+            <div className={s.divBtnForm}>
+              <button className={s.btnForm} onClick={() => handlePostCategory()}>Añadir</button>
+            </div>
           </div>
-        </div>
+          )
+        }
       </div>
     </div>
   )
