@@ -44,3 +44,118 @@
     display: none;
   }
 }
+/* Header.module.css */
+
+/* Contenedor principal */
+/* .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+/* Logo */
+/* .logo {
+  width: 100px;
+  height: 100px;
+} */
+
+/* Barra de navegación */
+/* .nav {
+  display: flex;
+  align-items: center;
+} */
+
+/* nav {
+  display: flex;
+  gap: 1rem;
+} */
+
+/* nav a {
+  color: #333333;
+  text-decoration: none;
+  font-weight: bold;
+} */
+
+/* Íconos de búsqueda, perfil y carrito */
+/* .icon {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333333;
+} */
+
+.searchContainer {
+  position: relative;
+  display: inline-block; /* Ajustar el ancho del contenedor al input */
+}
+
+/* Ventana emergente de resultados */
+.searchResults {
+  position: absolute;
+  top: 100%; /* Colocar la ventana emergente debajo del input search */
+  right: 0; /* Alinear a la derecha */
+  width: 250px; /* Ancho de la ventana emergente */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 2; /* Asegurar que esté por encima de todo lo demás */
+  margin-top: 10px; /* Ajustar la distancia entre la ventana emergente y el input */
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+/* Ajusta el tamaño de la miniatura de la foto */
+.resultItem img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.seeMore {
+  color: #007bff;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Menú Hamburguesa */
+.burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+
+  /* Mostrar el menú desplegable cuando el usuario hace clic en el ícono de hamburguesa */
+  .menu-open .nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 1;
+  }
+}

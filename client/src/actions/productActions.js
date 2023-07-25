@@ -31,6 +31,18 @@ export const searchProducts = (searchTerm) => ({
   payload: searchTerm,
 });
 
+// Acción para realizar la búsqueda en el navbar
+export const searchProductsHeader = (searchTerm) => {
+  return {
+    type: 'SEARCH_PRODUCTS_NAVBAR',
+    payload: searchTerm,
+  };
+};
+export function clearSearchResults()  {
+  return {
+    type: 'CLEAR_SEARCH_RESULTS',
+  }
+}
 
 export function orderByPrice(payload) {
   return {

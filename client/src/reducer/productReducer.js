@@ -2,9 +2,7 @@ const initialState = {
   products: [],
   allProducts: [],
   searchTerm: '',
- 
-  // category: '',
-  // productById: [],
+  navbarSearchResults: [],
   sortOrder: 'relevance',
 };
 
@@ -20,15 +18,34 @@ function sortProducts(products, order) {
     return products.sort((a, b) => b.price - a.price);
   }
 }
-// Función para realizar la búsqueda de productos
 function searchProducts(products, searchTerm) {
   const keyword = searchTerm.trim().toLowerCase();
-  return products.filter(
+
+  const filteredProducts = products.filter(
     (product) =>
       product.name.toLowerCase().includes(keyword) ||
       product.description.toLowerCase().includes(keyword)
   );
+
+  console.log("Filtered products:", filteredProducts);
+
+  return filteredProducts;
 }
+
+export function searchProductsHeader(products, searchTerm) {
+  const keyword = searchTerm.trim().toLowerCase();
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(keyword) ||
+      product.description.toLowerCase().includes(keyword)
+  );
+
+  console.log('Search Term:', searchTerm);
+  console.log('Filtered Products:', filteredProducts);
+
+  return filteredProducts;
+}
+
 
 function productReducer(state = initialState, action) {
   switch (action.type) {
@@ -46,7 +63,7 @@ function productReducer(state = initialState, action) {
       };
     case 'ORDER_BY_PRICE':
           const sortedProducts = sortProducts(state.products, action.payload);
-          console.log(sortedProducts);
+       
               return {
                     ...state,
                   products: [...sortedProducts],
@@ -69,7 +86,23 @@ function productReducer(state = initialState, action) {
                   ...state,
                   products: filteredProducts,
               };
-
+              case 'SEARCH_PRODUCTS_NAVBAR':
+                const keyword = action.payload.trim().toLowerCase();
+                // Llamar a la función searchProductsHeader para obtener los resultados
+                const searchResults = searchProductsHeader(state.allProducts, keyword);
+              
+                // Puedes limitar la cantidad de resultados que se muestran en el navbar, por ejemplo, a 5 resultados
+                const navbarResults = searchResults.slice(0, 5);
+              
+                return {
+                  ...state,
+                  navbarSearchResults: navbarResults,
+                };
+                case 'CLEAR_SEARCH_RESULTS':
+                  return {
+                    ...state,
+                    navbarSearchResults: []
+                  }                   
     default:
       return state;
   }
