@@ -7,7 +7,6 @@ import { formatName } from '../../../utils/helpers';
 const CategoryManagement = () => {
   const categories = useSelector((state) => state.categories.categories);
   const allCategories = useSelector((state) => state.categories.allCategories);
-  // const category = useSelector((state) => state.categories.category);
   const [selectedTab, setSelectedTab] = useState('categories');
   const [categoryName, setCategoryName] = useState('');
   const [parentCategory, setParentCategory] = useState('');
@@ -45,6 +44,7 @@ const CategoryManagement = () => {
       setParentCategory('');
       setError('');
       dispatch(getCategories());
+      // dispatch(filterCategories(parentSelect));
     }
   }
 
@@ -73,7 +73,7 @@ const CategoryManagement = () => {
 
     if (categoryName.trim() === '') {
       setError('El nombre de categoría no puede estar vacío');
-    } else if (categoryExist) {
+    } else if (categoryExist && categoryExist.name.toLowerCase() !== category.name.toLowerCase()) {
       setError('La categoría ya existe');
     } else {
       await dispatch(putCategory({ id: category.id, name: categoryName.trim(), parentId: parentCategory === "" ? null : parentCategory }));
@@ -83,6 +83,13 @@ const CategoryManagement = () => {
       setError('');
       dispatch(getCategories());
     }
+  }
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setCategoryName('');
+    setParentCategory('');
+    setError('');
   }
 
   return(
@@ -161,7 +168,7 @@ const CategoryManagement = () => {
                           <td>{index + 1}</td>
                           <td style={{ textAlign: 'left' }}>{formatName(el.name)}</td>
                           <td className={s.btnsCategory} style={{ textAlign: 'right' }}>
-                            <button>Editar</button>
+                            <button onClick={() => handleEditCategory(el.id)}>Editar</button>
                             <button onClick={() => handleDeleteCategory(el.id)}>Eliminar</button>
                           </td>
                         </tr>                        
@@ -200,6 +207,7 @@ const CategoryManagement = () => {
               </div>           
             </div>
             <div className={s.divBtnForm}>
+              <button className={s.btnForm} onClick={() => handleCancelEdit()}>Cancelar</button>
               <button className={s.btnForm} onClick={() => handleSaveCategory()}>Guardar</button>
             </div>
           </div>
