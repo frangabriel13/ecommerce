@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import s from './CategoryManagement.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories, deleteCategory, postCategory, filterCategories } from '../../../actions/categoryAction';
+import { getCategories, deleteCategory, postCategory, filterCategories, putCategory } from '../../../actions/categoryAction';
 import { formatName } from '../../../utils/helpers';
 
 const CategoryManagement = () => {
   const categories = useSelector((state) => state.categories.categories);
   const allCategories = useSelector((state) => state.categories.allCategories);
-  const category = useSelector((state) => state.categories.category);
+  // const category = useSelector((state) => state.categories.category);
   const [selectedTab, setSelectedTab] = useState('categories');
   const [categoryName, setCategoryName] = useState('');
   const [parentCategory, setParentCategory] = useState('');
   const [parentSelect, setParentSelect] = useState('');
+  const [category, setCategory] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
@@ -57,6 +58,33 @@ const CategoryManagement = () => {
     dispatch(filterCategories(id));
   }
 
+  const handleEditCategory = (id) => {
+    const categoryToEdit = allCategories.find((el) => el.id === id);
+    if(categoryToEdit) {
+      setEditMode(true);
+      setCategory(categoryToEdit);
+      setCategoryName(categoryToEdit.name);
+      setParentCategory(categoryToEdit.parentId || '');
+    }
+  }
+
+  const handleSaveCategory = async () => {
+    const categoryExist = allCategories.find((el) => el.name.toLowerCase() === categoryName.toLowerCase().trim());
+
+    if (categoryName.trim() === '') {
+      setError('El nombre de categoría no puede estar vacío');
+    } else if (categoryExist) {
+      setError('La categoría ya existe');
+    } else {
+      await dispatch(putCategory({ id: category.id, name: categoryName.trim(), parentId: parentCategory === "" ? null : parentCategory }));
+      setEditMode(false);
+      setCategoryName('');
+      setParentCategory('');
+      setError('');
+      dispatch(getCategories());
+    }
+  }
+
   return(
     <div className={s.container}>
       <h2>Administrar categorías</h2>
@@ -97,7 +125,7 @@ const CategoryManagement = () => {
                             <td>{index + 1}</td>
                             <td style={{ textAlign: 'left' }}>{formatName(el.name)}</td>
                             <td className={s.btnsCategory} style={{ textAlign: 'right' }}>
-                              <button>Editar</button>
+                              <button onClick={() => handleEditCategory(el.id)}>Editar</button>
                               <button onClick={() => handleDeleteCategory(el.id)}>Eliminar</button>
                             </td>
                           </tr>
@@ -172,7 +200,7 @@ const CategoryManagement = () => {
               </div>           
             </div>
             <div className={s.divBtnForm}>
-              <button className={s.btnForm} onClick={() => handlePostCategory()}>Añadir</button>
+              <button className={s.btnForm} onClick={() => handleSaveCategory()}>Guardar</button>
             </div>
           </div>
           ) : (
