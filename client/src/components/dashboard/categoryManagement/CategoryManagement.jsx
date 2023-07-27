@@ -43,14 +43,27 @@ const CategoryManagement = () => {
       setCategoryName('');
       setParentCategory('');
       setError('');
-      dispatch(getCategories());
-      // dispatch(filterCategories(parentSelect));
+      await dispatch(getCategories());
+      if (selectedTab === 'subcategories') {
+        const firstCategory = allCategories.find((el) => el.parentId === null);
+        if (firstCategory) {
+          setParentSelect(firstCategory.id);
+          dispatch(filterCategories(firstCategory.id));
+        }
+      }
     }
   }
 
   const handleDeleteCategory = async (id) => {
     await dispatch(deleteCategory(id));
-    dispatch(getCategories());
+    await dispatch(getCategories());
+    if (selectedTab === 'subcategories') {
+      const firstCategory = allCategories.find((el) => el.parentId === null);
+      if (firstCategory) {
+        setParentSelect(firstCategory.id);
+        dispatch(filterCategories(firstCategory.id));
+      }
+    }
   }
 
   const handleFilterCategories = (id) => {
@@ -81,7 +94,14 @@ const CategoryManagement = () => {
       setCategoryName('');
       setParentCategory('');
       setError('');
-      dispatch(getCategories());
+      await dispatch(getCategories());
+      if (selectedTab === 'subcategories') {
+        const firstCategory = allCategories.find((el) => el.parentId === null);
+        if (firstCategory) {
+          setParentSelect(firstCategory.id);
+          dispatch(filterCategories(firstCategory.id));
+        }
+      }
     }
   }
 
