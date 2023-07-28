@@ -1,5 +1,5 @@
 import React from "react";
-import ProductForm from "./productForm/ProductForm";
+import ProductManagement from "./productManagement/ProductManagement";
 import CategoryManagement from "./categoryManagement/CategoryManagement";
 import SideBar from "./sideBar/SideBar";
 import s from './Dashboard.module.css';
@@ -11,9 +11,8 @@ function Dashboard() {
         <SideBar />
       </div>
       <div className={s.content}>
-        <CategoryManagement />
+        <ProductManagement />
       </div>
-      {/* <ProductForm /> */}
       
     </div>
   );
