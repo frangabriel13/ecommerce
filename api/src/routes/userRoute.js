@@ -4,6 +4,7 @@ const { getUserById, updateUser, deleteUser } = require('../controllers/userCont
 
 const router = Router();
 
+
 router.get('/users', async (req, res) => {
   try {
     const users = await User.findAll();

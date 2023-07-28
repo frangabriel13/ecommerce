@@ -6,6 +6,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Detail from './components/detail/Detail';
 import ProductStore from './components/productStore/ProductStore';
 import ComoComprar from './components/como-comprar/ComoComprar';
+import Contact from './components/contact/Contact';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/products/:id' element={<Detail />} />
         <Route path='/como-comprar' element={<ComoComprar />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </>
   )
