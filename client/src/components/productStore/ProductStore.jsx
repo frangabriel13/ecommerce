@@ -9,10 +9,10 @@ import { getCategories } from '../../actions/categoryAction';
 function ProductStore() {
 
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories.allCategories.data)
+  const categories = useSelector(state => state.categories.allCategories)
 
   const products = useSelector(state => state.products.products);
-  console.log(products);
+  
   const sortOrder = useSelector(state => state.products.sortOrder);
   const [searchTerm, setSearchTerm] = useState('');
   // const sortedProducts = useSelector(state => state.products.filteredItems);

@@ -5,6 +5,7 @@ import Info from "../info/Info";
 
 import ProductStore from "../productStore/ProductStore";
 import Footer from "../footer/Footer";
+import Categories from "../categories/Categories";
 
 
 function Home() {
@@ -12,9 +13,10 @@ function Home() {
     <div className={s.container}>
       <Banner />
       <Info />
-     
+      <Categories />
      
       <Footer />
+
     </div>
   );
 }

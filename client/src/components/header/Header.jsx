@@ -64,8 +64,7 @@ function Header() {
     setShowResults(false);
   };
 
-  console.log('Navbar Search Results:', navbarSearchResults); // Agregar el console.log aquí
-
+ 
   return (
     <div className={s.container}>
       <NavLink to={"/"}>
@@ -85,7 +84,9 @@ function Header() {
           </NavLink>
             
           <a href='#'>Categorías</a>
-          <a href='#'>Contacto</a>
+          <NavLink to={"/contact"}>
+            Contacto
+          </NavLink>
         </nav>
       
         <div className={s.searchContainer}>
