@@ -5,6 +5,7 @@ import s from './ProductManagement.module.css';
 function ProductManagement() {
   return (
     <div className={s.container}>
+      <h2>Administrar Categorías</h2>
       <ProductForm />
       <div>
         <h3>Lista de productos</h3>
