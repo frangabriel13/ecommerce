@@ -2,10 +2,11 @@ import React from "react";
 import s from "./Home.module.css";
 import Banner from "../banner/Banner";
 import Info from "../info/Info";
-
-import ProductStore from "../productStore/ProductStore";
 import Footer from "../footer/Footer";
 import Categories from "../categories/Categories";
+import NewArrivals from "../newArrivals/newArrivals";
+
+
 
 
 function Home() {
@@ -14,7 +15,7 @@ function Home() {
       <Banner />
       <Info />
       <Categories />
-     
+      <NewArrivals />
       <Footer />
 
     </div>

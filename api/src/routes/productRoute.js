@@ -28,6 +28,22 @@ router.get('/products/:id', async (req, res) => {
   }
 });
 
+router.get('/new-arrivals', async (req, res) => {
+  try {
+    // Realiza la consulta a la base de datos para obtener los últimos 10 artículos ordenados por fecha de creación descendente
+    const newArrivals = await Product.findAll({
+      order: [['createdAt', 'DESC']],
+      limit: 4,
+    });
+
+    res.json(newArrivals);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener los últimos artículos', error });
+  }
+});
+
+
+
 router.post("/products", async (req, res) => {
   let { name, description, price, discount, category, images, stock, isVariable, categories } = req.body;
 

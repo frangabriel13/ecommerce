@@ -2,7 +2,7 @@ import ProductCard from '../productCard/ProductCard';
 import style from './ProductCards.module.css';
 import React, { useState } from 'react';
 
-export default function ProductCards( {products} ) {
+export default function ProductCards( {products, product} ) {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -23,7 +23,18 @@ export default function ProductCards( {products} ) {
             productId={c.id}
             onSelectProduct={handleProductSelect} // Pasar la función handleProductSelect como prop
           />
-        ))}
+        ))} || {product &&
+          product.map((c) => (
+             <ProductCard
+             name={c.name}
+             price={c.price}
+             id={c.id}
+             images={c.images}
+             key={c.id}
+             productId={c.id}
+             onSelectProduct={handleProductSelect} // Pasar la función handleProductSelect como prop
+           />
+         ))}
     </div>
   );
 }

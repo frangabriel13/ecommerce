@@ -1,0 +1,55 @@
+/* NewArrivals.module.css */
+
+.newArrivals {
+  width: 100%;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.newArrivalsTitle {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.newArrivalsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.newArrivalsCard {
+  flex: 0 0 calc(33.333% - 10px); /* Tres columnas alineadas horizontalmente */
+  max-width: calc(33.333% - 10px);
+}
+
+.newArrivalsCard:hover {
+  transform: scale(1.1); /* Efecto de acercamiento en hover */
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para el componente ProductCard, ajusta según tus necesidades */
+.productCard {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.productCardImage {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.productCardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.productCardPrice {
+  font-size: 16px;
+  color: #666;
+}

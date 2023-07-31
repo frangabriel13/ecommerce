@@ -4,18 +4,22 @@
 
 .row {
   display: flex;
-  margin: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  width: 100%;
+ 
 }
 
 
 /* CategoriesSection.css */
 
-.categories-section {
+.section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0;
   padding: 0;
+  margin-bottom: 50px;
 }
 
 .category {
