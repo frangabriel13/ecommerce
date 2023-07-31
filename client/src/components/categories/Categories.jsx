@@ -3,7 +3,7 @@ import s from './Categories.module.css'; // Estilo CSS para el componente
 
 const Categories = () => {
   return (
-    <div className={s.categoriesSection}>
+    <div className={s.section}>
       <div className={s.row}>
         <a className={s.category} href="#categoria1">
           <img src="https://rumay.com.ar/wp-content/uploads/2023/04/Diseno-sin-titulo-80.png" alt="Categoria 1" />
@@ -31,7 +31,7 @@ const Categories = () => {
           <img src="https://rumay.com.ar/wp-content/uploads/2023/04/Diseno-sin-titulo-80.png" alt="Categoria 6" />
           <h3>Categoria 6</h3>
         </a>
-        <br />
+        
       </div>
     </div>
   );
